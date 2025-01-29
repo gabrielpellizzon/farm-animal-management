@@ -1,0 +1,28 @@
+<div
+  class="general-layout"
+  [ngClass]="{
+    whiteBackground: isWhiteBackground,
+    greyBackground: !isWhiteBackground
+  }"
+>
+  <header class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center mt-3 mx-3">
+      <button
+        mat-icon-button
+        class="back-button"
+        aria-label="Back"
+        (click)="onBack()"
+        matTooltip="Back"
+        matTooltipPosition="below"
+        [ngStyle]="{ visibility: backButtonVisible ? 'visible' : 'hidden' }"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="title">{{ title }}</h1>
+    </div>
+  </header>
+
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.general-layout {
+  min-width: 98vw;
+  min-height: calc(100vh - 124px);
+
+  &.whiteBackground {
+    background-color: #ffffff;
+  }
+
+  &.greyBackground {
+    background-color: #eeeeee;
+  }
+
+  header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    .back-button {
+      margin-right: 1rem;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+  }
+
+  .content {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
