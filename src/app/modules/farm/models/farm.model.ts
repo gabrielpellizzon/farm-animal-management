@@ -1,7 +1,8 @@
-export interface Farm {
-  id: string;
+export interface FarmRequest {
   name: string;
-  location: string;
-  size: number; // em hectares
-  owner: string;
+}
+
+export interface FarmResponse {
+  id: number;
+  name: string;
 }

@@ -1,0 +1,33 @@
+.max-width-card {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.fab-button {
+  background-color: var(--primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.icon-button {
+  background-color: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+@media (max-width: 600px) {
+  .fab-button {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) {
+  .icon-button {
+    display: none;
+  }
+}
