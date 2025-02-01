@@ -8,6 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/farm/farm.module').then((m) => m.FarmModule),
   },
+  { path: '**', redirectTo: 'farm' },
 ];
 
 @NgModule({

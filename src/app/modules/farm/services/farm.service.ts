@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Farm } from '../models/farm.model';
+import { FarmRequest, FarmResponse } from '../interfaces/farm.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FarmService {
-  private readonly apiUrl = 'https://api.exemplo.com/farm';
+  private readonly apiUrl = '/api/farm/';
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Farm[]> {
-    return this.http.get<Farm[]>(this.apiUrl);
+  getAll() {
+    return this.http.get<FarmResponse[]>(this.apiUrl);
   }
 
-  getById(id: string): Observable<Farm> {
-    return this.http.get<Farm>(`${this.apiUrl}/${id}`);
+  getById(id: string) {
+    return this.http.get<FarmResponse>(`${this.apiUrl}/${id}`);
   }
 
-  create(farm: Farm): Observable<Farm> {
-    return this.http.post<Farm>(this.apiUrl, farm);
+  create(farm: FarmRequest) {
+    return this.http.post<FarmRequest>(this.apiUrl, farm);
   }
 
-  update(id: string, farm: Farm): Observable<Farm> {
-    return this.http.put<Farm>(`${this.apiUrl}/${id}`, farm);
+  update(id: string, farm: FarmRequest) {
+    return this.http.put<FarmRequest>(`${this.apiUrl}/${id}`, farm);
   }
 
-  delete(id: string): Observable<void> {
+  delete(id: string) {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

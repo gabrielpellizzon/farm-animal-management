@@ -8,6 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDividerModule,
     MatCardModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
   ],
   exports: [
     FormsModule,
@@ -31,6 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDividerModule,
     MatCardModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}
