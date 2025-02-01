@@ -13,8 +13,9 @@ export class FarmFormComponent {
   errorMessage = signal('');
 
   constructor(
-    private dialogRef: MatDialogRef<FarmFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FarmResponse
+    @Inject(MAT_DIALOG_DATA)
+    public data: FarmResponse,
+    private dialogRef: MatDialogRef<FarmFormComponent>
   ) {
     this.farmFormGroup = new FormGroup({
       name: new FormControl<string>(
