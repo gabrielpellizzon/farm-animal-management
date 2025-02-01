@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Are you sure?</h1>
+<div mat-dialog-content>
+  <p>
+    Do you really want to delete <strong>{{ data.title }}</strong
+    >?
+  </p>
+</div>
+<div mat-dialog-actions class="justify-content-end mx-2">
+  <button
+    mat-button
+    type="button"
+    matTooltip="Cancel"
+    matTooltipPosition="below"
+    (click)="onCancel()"
+    class="me-2"
+  >
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    type="button"
+    (click)="onConfirm()"
+    matTooltip="Delete"
+    matTooltipPosition="below"
+    cdkFocusInitial
+    style="color: #fff; background-color: var(--danger)"
+  >
+    Delete
+  </button>
+</div>

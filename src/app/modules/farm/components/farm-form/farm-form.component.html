@@ -1,0 +1,38 @@
+<mat-card class="p-4" style="max-height: 600px">
+  <mat-card-content>
+    @if (!data.name) {
+    <div class="row col-sm-12">
+      <h2>Create Farm</h2>
+    </div>
+    } @else {
+    <div class="row col-sm-12">
+      <h2>Update Farm</h2>
+    </div>
+
+    }
+
+    <form [formGroup]="farmFormGroup">
+      <mat-form-field class="mt-4 pt-2 w-100">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" (input)="updateErrorMessage()" />
+
+        @if (farmFormGroup.controls.name.invalid) {
+        <mat-error style="color: var(--danger)">{{ errorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex justify-content-end align-items-center">
+      <button mat-button (click)="onCancel()" class="ml-2">Cancel</button>
+      <button
+        mat-flat-button
+        (click)="onAdd()"
+        [disabled]="farmFormGroup.invalid"
+        style="background-color: var(--primary); color: #fff"
+      >
+        @if(!data.name) { Add } @else { Update }
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

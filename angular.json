@@ -63,6 +63,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json",
+            "buildTarget": "farm-animal-management:build",
+            "port": 4200
+          },
           "configurations": {
             "production": {
               "buildTarget": "farm-animal-management:build:production"
