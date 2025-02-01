@@ -1,0 +1,74 @@
+<mat-card class="p-4" style="max-height: 600px">
+  <mat-card-content>
+    @if (!data.name) {
+    <div class="row col-sm-12">
+      <h2>Create Animal</h2>
+    </div>
+    } @else {
+    <div class="row col-sm-12">
+      <h2>Update Animal</h2>
+    </div>
+
+    }
+
+    <form [formGroup]="animalFormGroup">
+      <mat-form-field class="mt-4 w-100" appearance="outline">
+        <mat-label>Farm ID</mat-label>
+        <input
+          matInput
+          formControlName="farmId"
+          (input)="updateFarmIdErrorMessage()"
+        />
+
+        @if (animalFormGroup.controls.farmId.invalid) {
+        <mat-error style="color: var(--danger)">{{
+          farmIdErrorMessage()
+        }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="mt-4 w-100" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          (input)="updateNameErrorMessage()"
+        />
+
+        @if (animalFormGroup.controls.name.invalid) {
+        <mat-error style="color: var(--danger)">{{
+          nameErrorMessage()
+        }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="mt-4 w-100" appearance="outline">
+        <mat-label>Tag</mat-label>
+        <input
+          matInput
+          formControlName="tag"
+          (input)="updateTagErrorMessage()"
+        />
+
+        @if (animalFormGroup.controls.tag.invalid) {
+        <mat-error style="color: var(--danger)">{{
+          tagErrorMessage()
+        }}</mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex justify-content-end align-items-center">
+      <button mat-button (click)="onCancel()" class="ml-2">Cancel</button>
+      <button
+        mat-flat-button
+        (click)="onAdd()"
+        [disabled]="animalFormGroup.invalid"
+        style="background-color: var(--primary); color: #fff"
+      >
+        @if(!data.name) { Add } @else { Update }
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

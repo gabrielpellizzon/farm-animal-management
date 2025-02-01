@@ -8,6 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/farm/farm.module').then((m) => m.FarmModule),
   },
+  { path: 'animal', loadChildren: () => import('./modules/animal/animal.module').then(m => m.AnimalModule) },
   { path: '**', redirectTo: 'farm' },
 ];
 

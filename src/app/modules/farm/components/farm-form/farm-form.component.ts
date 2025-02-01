@@ -17,7 +17,7 @@ export class FarmFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: FarmResponse
   ) {
     this.farmFormGroup = new FormGroup({
-      name: new FormControl(
+      name: new FormControl<string>(
         { value: '', disabled: false },
         {
           nonNullable: true,
