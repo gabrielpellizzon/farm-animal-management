@@ -14,7 +14,7 @@ export class FarmService {
     return this.http.get<FarmResponse[]>(this.apiUrl);
   }
 
-  getById(id: string) {
+  getById(id: number) {
     return this.http.get<FarmResponse>(`${this.apiUrl}/${id}`);
   }
 
@@ -22,7 +22,7 @@ export class FarmService {
     return this.http.post<FarmRequest>(this.apiUrl, farm);
   }
 
-  update(id: string, farm: FarmRequest) {
+  update(id: number, farm: FarmRequest) {
     return this.http.put<FarmRequest>(`${this.apiUrl}/${id}`, farm);
   }
 

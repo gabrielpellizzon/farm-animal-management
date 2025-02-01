@@ -10,12 +10,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
-  declarations: [
-    ConfirmationDialogComponent
-  ],
+  declarations: [ConfirmationDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,6 +29,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     FormsModule,
@@ -40,6 +43,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class SharedModule {}

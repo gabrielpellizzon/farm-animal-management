@@ -18,6 +18,7 @@
       class="fab-button"
       matTooltip="Add Farm"
       matTooltipPosition="below"
+      (click)="openCreateFarmDialog()"
     >
       <mat-icon>add</mat-icon>
       Add Farm
@@ -28,6 +29,7 @@
       class="icon-button"
       matTooltip="Add Farm"
       matTooltipPosition="below"
+      (click)="openCreateFarmDialog()"
     >
       <mat-icon>add</mat-icon>
     </button>
@@ -64,6 +66,7 @@
               mat-icon-button
               matTooltip="Edit Farm"
               matTooltipPosition="below"
+              (click)="openCreateFarmDialog(element)"
             >
               <mat-icon>edit</mat-icon>
             </button>

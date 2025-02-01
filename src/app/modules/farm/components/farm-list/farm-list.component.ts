@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FarmResponse } from '../../interfaces/farm.interface';
+import { FarmRequest, FarmResponse } from '../../interfaces/farm.interface';
 import { FarmService } from '../../services/farm.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dialog/confirmation-dialog.component';
+import { FarmFormComponent } from '../farm-form/farm-form.component';
 
 @Component({
   selector: 'app-farm-list',
@@ -34,7 +35,7 @@ export class FarmListComponent implements OnInit {
 
   openConfirmationDialog(element: FarmResponse) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '400px',
+      width: '30%',
       disableClose: false,
       data: { title: element.name },
     });
@@ -48,8 +49,11 @@ export class FarmListComponent implements OnInit {
 
   deleteFarm(id: number) {
     this.farmService.delete(id).subscribe({
-      error: () => alert('Deleting error'),
-      complete: () => this.getFarmList(),
+      error: () => alert('Delete error'),
+      complete: () => {
+        alert('Delete success');
+        this.getFarmList();
+      },
     });
   }
 
@@ -68,13 +72,49 @@ export class FarmListComponent implements OnInit {
     }
   }
 
+  openCreateFarmDialog(farmData?: FarmResponse) {
+    const dialogRef = this.dialog.open(FarmFormComponent, {
+      width: '70%',
+      maxWidth: '100rem',
+      disableClose: false,
+      data: farmData || {},
+    });
+
+    dialogRef.afterClosed().subscribe((data: string) => {
+      if (data) {
+        console.log(data);
+        if (!farmData) {
+          const farmToCreate: FarmRequest = { name: data };
+
+          this.farmService.create(farmToCreate).subscribe({
+            error: () => alert('Create error'),
+            complete: () => {
+              this.getFarmList();
+              alert('Create success');
+            },
+          });
+        } else {
+          const farmToUpdate: FarmResponse = { ...farmData, name: data };
+
+          this.farmService.update(farmData.id, farmToUpdate).subscribe({
+            error: () => alert('Update error'),
+            complete: () => {
+              this.getFarmList();
+              alert('Update success');
+            },
+          });
+        }
+      }
+    });
+  }
+
   private getFarmList() {
     this.farmService.getAll().subscribe({
       next: (farmList) => {
         this.farmDataSource.data = farmList;
         this.filteredFarms = farmList;
       },
-      error: () => alert('Loading error'),
+      error: () => alert('Load error'),
     });
   }
 }
