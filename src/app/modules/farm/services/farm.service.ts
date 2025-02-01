@@ -26,7 +26,7 @@ export class FarmService {
     return this.http.put<FarmRequest>(`${this.apiUrl}/${id}`, farm);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

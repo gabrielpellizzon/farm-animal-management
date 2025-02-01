@@ -1,0 +1,184 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define padding values
+$padding-small: 0.5rem;
+$padding-medium: 1rem;
+$padding-large: 1.5rem;
+
+// Define margin values
+$margin-small: 0.5rem;
+$margin-medium: 1rem;
+$margin-large: 1.5rem;
+
+// Define font size values
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-sm: 0.875rem; // 14px
+$font-size-smaller: 0.625rem; // 10px
+
+// Define spacing values
+$spacing-unit: 1rem;
+
+// Define border radius
+$border-radius: 0.25rem; // 4px
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #1e4135;
+  --primary-card: #00569dd5;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+footer {
+  background-color: #1e4135;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  font-size: 0.875rem;
+  min-height: 60px;
+}
+
+h1 {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-unit;
+}
+
+h2 {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-unit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mat-divider-color);
+  border-radius: 6px;
+}
+
+.offcanvas {
+  background-color: var(--primary) !important;
+}
+
+.mat-mdc-snack-bar-container {
+  border-radius: $border-radius;
+  padding: $padding-medium;
+  font-size: $font-size-base;
+  color: #ffffff;
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+  &.success-snackbar {
+    --mdc-snackbar-container-color: var(--success);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.error-snackbar {
+    --mdc-snackbar-container-color: var(--danger);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.info-snackbar {
+    --mdc-snackbar-container-color: var(--warning);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
+.snackbar {
+  border-radius: $border-radius;
+  padding: $padding-medium;
+  font-size: $font-size-base;
+  color: #ffffff;
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.width-card {
+  width: 90%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.content-container {
+  margin-top: 66px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
