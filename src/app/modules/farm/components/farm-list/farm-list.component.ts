@@ -80,7 +80,6 @@ export class FarmListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((data: string) => {
       if (data) {
-        console.log(data);
         if (!farmData) {
           const farmToCreate: FarmRequest = { name: data };
 

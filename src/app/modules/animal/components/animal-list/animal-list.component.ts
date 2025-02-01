@@ -77,20 +77,19 @@ export class AnimalListComponent {
     }
   }
 
-  openCreateAnimalDialog(farmData?: AnimalResponse) {
+  openCreateAnimalDialog(animalData?: AnimalResponse) {
     const dialogRef = this.dialog.open(AnimalFormComponent, {
       width: '70%',
       maxWidth: '100rem',
       disableClose: false,
-      data: farmData || {},
+      data: animalData || {},
     });
 
     dialogRef
       .afterClosed()
       .subscribe((data: AnimalRequest | AnimalResponse) => {
         if (data) {
-          console.log(data);
-          if (!farmData) {
+          if (!animalData) {
             const animalToCreate: AnimalRequest = data;
 
             this.animalService.create(animalToCreate).subscribe({
@@ -103,7 +102,7 @@ export class AnimalListComponent {
           } else {
             const farmToUpdate: AnimalResponse = data as AnimalResponse;
 
-            this.animalService.update(farmData.id, farmToUpdate).subscribe({
+            this.animalService.update(animalData.id, farmToUpdate).subscribe({
               error: () => alert('Update error'),
               complete: () => {
                 this.getAnimalList();
@@ -120,7 +119,6 @@ export class AnimalListComponent {
       next: (animalList) => {
         this.animalDataSource.data = animalList;
         this.filteredAnimals = animalList;
-        console.log(this.animalDataSource.data);
       },
       error: () => alert('Load error'),
     });

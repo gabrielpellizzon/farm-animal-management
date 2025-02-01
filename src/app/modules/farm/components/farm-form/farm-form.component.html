@@ -12,7 +12,11 @@
     }
 
     <form [formGroup]="farmFormGroup">
-      <mat-form-field class="mt-4 pt-2 w-100">
+      <mat-form-field
+        style="min-height: 40px"
+        class="mt-4 pt-2 w-100"
+        appearance="outline"
+      >
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" (input)="updateErrorMessage()" />
 
