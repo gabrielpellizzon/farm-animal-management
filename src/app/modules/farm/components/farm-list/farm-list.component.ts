@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dialog/confirmation-dialog.component';
 import { FarmRequest, FarmResponse } from '../../interfaces/farm.interface';
 import { FarmService } from '../../services/farm.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dialog/confirmation-dialog.component';
 import { FarmFormComponent } from '../farm-form/farm-form.component';
 
 @Component({
@@ -13,7 +12,6 @@ import { FarmFormComponent } from '../farm-form/farm-form.component';
   styleUrl: './farm-list.component.scss',
 })
 export class FarmListComponent implements OnInit {
-  paginator!: MatPaginator;
   farmDataSource = new MatTableDataSource<FarmResponse>();
   displayedColumns = ['name', 'animals', 'actions'];
   searchFarmsInput = '';
