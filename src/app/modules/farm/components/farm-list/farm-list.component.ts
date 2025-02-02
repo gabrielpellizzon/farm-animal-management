@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dialog/confirmation-dialog.component';
 import { FarmRequest, FarmResponse } from '../../interfaces/farm.interface';
 import { FarmService } from '../../services/farm.service';
-import { FarmFormComponent } from '../farm-form/farm-form.component';
 import { FarmAnimalListComponent } from '../farm-animal-list/farm-animal-list.component';
-import { AnimalResponse } from '../../../animal/interfaces/animal';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FarmFormComponent } from '../farm-form/farm-form.component';
 
 pdfMake.vfs = pdfFonts.vfs;
 
@@ -124,6 +123,9 @@ export class FarmListComponent implements OnInit {
       error: () => alert('Load error'),
     });
 
+    //The code below is responsible to populate my animal list with mocked animal.
+    //Just need to comment the code above.
+
     // this.dialog.open(FarmAnimalListComponent, {
     //   width: '80%',
     //   maxWidth: '100vh',
@@ -220,7 +222,7 @@ export class FarmListComponent implements OnInit {
     this.farmService.getAll().subscribe({
       next: (farmList) => {
         //const mockedAnimals = this.mockAnimalsForFarms(farmList);
-        this.farmDataSource.data = farmList;
+        this.farmDataSource.data = farmList; //mockedAnimals;
         this.filteredFarms = farmList;
       },
       error: () => alert('Load error'),
