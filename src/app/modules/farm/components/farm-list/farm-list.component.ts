@@ -75,7 +75,7 @@ export class FarmListComponent implements OnInit {
   openCreateFarmDialog(farmData?: FarmResponse) {
     const dialogRef = this.dialog.open(FarmFormComponent, {
       width: '70%',
-      maxWidth: '100rem',
+      maxWidth: '100vh',
       disableClose: false,
       data: farmData || {},
     });
@@ -108,19 +108,24 @@ export class FarmListComponent implements OnInit {
   }
 
   openAnimalList(element: FarmResponse) {
-    const dialogRef = this.dialog.open(FarmAnimalListComponent, {
-      width: '80%',
-      maxWidth: '100rem',
-      disableClose: false,
-      data: element || {},
+    this.farmService.getById(element.id).subscribe({
+      next: (farm) => {
+        this.dialog.open(FarmAnimalListComponent, {
+          width: '80%',
+          maxWidth: '100vh',
+          disableClose: false,
+          data: farm || {},
+        });
+      },
+      error: () => alert('Load error'),
     });
   }
 
   private getFarmList() {
     this.farmService.getAll().subscribe({
       next: (farmList) => {
-        const mockedAnimals = this.mockAnimalsForFarms(farmList);
-        this.farmDataSource.data = mockedAnimals;
+        // const mockedAnimals = this.mockAnimalsForFarms(farmList);
+        this.farmDataSource.data = farmList; //mockedAnimals;
         this.filteredFarms = farmList;
       },
       error: () => alert('Load error'),
@@ -128,28 +133,28 @@ export class FarmListComponent implements OnInit {
   }
 
   //FUNCTION CREATED TO MOCK ANIMALS (API IS NOT WORKING WELL)
-  private mockAnimalsForFarms(farms: FarmResponse[]): FarmResponse[] {
-    const mockAnimals: AnimalResponse[] = [];
+  // private mockAnimalsForFarms(farms: FarmResponse[]): FarmResponse[] {
+  //   const mockAnimals: AnimalResponse[] = [];
 
-    const animalNames = ['Angus', 'Hereford', 'Brahman', 'Nelore'];
+  //   const animalNames = ['Angus', 'Hereford', 'Brahman', 'Nelore'];
 
-    farms.forEach((farm) => {
-      const numberOfAnimals = Math.floor(Math.random() * 50) + 1;
-      const animals: AnimalResponse[] = [];
+  //   farms.forEach((farm) => {
+  //     const numberOfAnimals = Math.floor(Math.random() * 50) + 1;
+  //     const animals: AnimalResponse[] = [];
 
-      for (let i = 0; i < numberOfAnimals; i++) {
-        animals.push({
-          id: mockAnimals.length + 1,
-          farmId: farm.id,
-          name: animalNames[Math.floor(Math.random() * animalNames.length)],
-          tag: `TAG-${farm.id}${i + 1}`,
-        });
-      }
+  //     for (let i = 0; i < numberOfAnimals; i++) {
+  //       animals.push({
+  //         id: mockAnimals.length + 1,
+  //         farmId: farm.id,
+  //         name: animalNames[Math.floor(Math.random() * animalNames.length)],
+  //         tag: `TAG-${farm.id}${i + 1}`,
+  //       });
+  //     }
 
-      farm.animals = animals;
-      mockAnimals.push(...animals);
-    });
+  //     farm.animals = animals;
+  //     mockAnimals.push(...animals);
+  //   });
 
-    return farms;
-  }
+  //   return farms;
+  // }
 }

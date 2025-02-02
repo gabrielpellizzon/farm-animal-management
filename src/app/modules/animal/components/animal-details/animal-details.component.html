@@ -1,0 +1,32 @@
+<mat-card class="d-flex flex-column" style="max-height: 75%">
+  <mat-card-header class="d-flex justify-content-between align-items-center">
+    <span class="w-100 text-center fw-bold">Animal Details</span>
+    <button mat-icon-button (click)="onClose()" class="ms-auto">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="align-items-center d-flex flex-column overflow-auto">
+    @if (data.id) {
+    <mat-card class="w-75 mb-4 p-3" style="background-color: #f5f5f5">
+      <mat-list dense>
+        <mat-list-item>
+          <mat-icon matListIcon>pets</mat-icon>
+          <div matLine><strong>Name:</strong> {{ data.name }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon matListIcon>label</mat-icon>
+          <div matLine><strong>Tag:</strong> {{ data.tag }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon matListIcon>agriculture</mat-icon>
+          <div matLine><strong>Fazenda:</strong> {{ data.farmId }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+    }
+  </mat-card-content>
+</mat-card>

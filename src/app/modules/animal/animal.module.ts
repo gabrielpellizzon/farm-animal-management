@@ -7,9 +7,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { TemplateModule } from '../../template/template.module';
 import { AnimalFormComponent } from './components/animal-form/animal-form.component';
 import { AnimalListComponent } from './components/animal-list/animal-list.component';
+import { AnimalDetailsComponent } from './components/animal-details/animal-details.component';
 
 @NgModule({
-  declarations: [AnimalViewComponent, AnimalFormComponent, AnimalListComponent],
+  declarations: [AnimalViewComponent, AnimalFormComponent, AnimalListComponent, AnimalDetailsComponent],
   imports: [CommonModule, AnimalRoutingModule, SharedModule, TemplateModule],
 })
 export class AnimalModule {}
