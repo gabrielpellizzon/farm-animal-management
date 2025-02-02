@@ -7,6 +7,7 @@ import { FarmService } from '../../services/farm.service';
 import { FarmFormComponent } from '../farm-form/farm-form.component';
 import { FarmAnimalListComponent } from '../farm-animal-list/farm-animal-list.component';
 import { AnimalResponse } from '../../../animal/interfaces/animal';
+import { XlsExporterService } from '../../../../shared/xls-exporter/xls-exporter.service';
 
 @Component({
   selector: 'app-farm-list',
@@ -108,24 +109,48 @@ export class FarmListComponent implements OnInit {
   }
 
   openAnimalList(element: FarmResponse) {
-    this.farmService.getById(element.id).subscribe({
-      next: (farm) => {
-        this.dialog.open(FarmAnimalListComponent, {
-          width: '80%',
-          maxWidth: '100vh',
-          disableClose: false,
-          data: farm || {},
-        });
-      },
-      error: () => alert('Load error'),
+    // this.farmService.getById(element.id).subscribe({
+    //   next: (farm) => {
+    //     this.dialog.open(FarmAnimalListComponent, {
+    //       width: '80%',
+    //       maxWidth: '100vh',
+    //       disableClose: false,
+    //       data: farm || {},
+    //     });
+    //   },
+    //   error: () => alert('Load error'),
+    // });
+
+    this.dialog.open(FarmAnimalListComponent, {
+      width: '80%',
+      maxWidth: '100vh',
+      disableClose: false,
+      data: element || {},
     });
+  }
+
+  exportAsXls() {
+    const date = new Date();
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const time = date.toLocaleTimeString();
+
+    const formattedDate = `${day}_${month}_${year}_${time}`;
+
+    XlsExporterService.exportToXls(
+      `farms_report_${formattedDate}`,
+      this.displayedColumns.filter((h) => !['details', 'actions'].includes(h)),
+      this.farmDataSource.data
+    );
   }
 
   private getFarmList() {
     this.farmService.getAll().subscribe({
       next: (farmList) => {
-        // const mockedAnimals = this.mockAnimalsForFarms(farmList);
-        this.farmDataSource.data = farmList; //mockedAnimals;
+        const mockedAnimals = this.mockAnimalsForFarms(farmList);
+        this.farmDataSource.data = mockedAnimals;
         this.filteredFarms = farmList;
       },
       error: () => alert('Load error'),
@@ -133,28 +158,28 @@ export class FarmListComponent implements OnInit {
   }
 
   //FUNCTION CREATED TO MOCK ANIMALS (API IS NOT WORKING WELL)
-  // private mockAnimalsForFarms(farms: FarmResponse[]): FarmResponse[] {
-  //   const mockAnimals: AnimalResponse[] = [];
+  private mockAnimalsForFarms(farms: FarmResponse[]): FarmResponse[] {
+    const mockAnimals: AnimalResponse[] = [];
 
-  //   const animalNames = ['Angus', 'Hereford', 'Brahman', 'Nelore'];
+    const animalNames = ['Angus', 'Hereford', 'Brahman', 'Nelore'];
 
-  //   farms.forEach((farm) => {
-  //     const numberOfAnimals = Math.floor(Math.random() * 50) + 1;
-  //     const animals: AnimalResponse[] = [];
+    farms.forEach((farm) => {
+      const numberOfAnimals = Math.floor(Math.random() * 50) + 1;
+      const animals: AnimalResponse[] = [];
 
-  //     for (let i = 0; i < numberOfAnimals; i++) {
-  //       animals.push({
-  //         id: mockAnimals.length + 1,
-  //         farmId: farm.id,
-  //         name: animalNames[Math.floor(Math.random() * animalNames.length)],
-  //         tag: `TAG-${farm.id}${i + 1}`,
-  //       });
-  //     }
+      for (let i = 0; i < numberOfAnimals; i++) {
+        animals.push({
+          id: mockAnimals.length + 1,
+          farmId: farm.id,
+          name: animalNames[Math.floor(Math.random() * animalNames.length)],
+          tag: `TAG-${farm.id}${i + 1}`,
+        });
+      }
 
-  //     farm.animals = animals;
-  //     mockAnimals.push(...animals);
-  //   });
+      farm.animals = animals;
+      mockAnimals.push(...animals);
+    });
 
-  //   return farms;
-  // }
+    return farms;
+  }
 }

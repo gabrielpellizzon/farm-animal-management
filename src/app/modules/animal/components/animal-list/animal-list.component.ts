@@ -6,6 +6,7 @@ import { AnimalResponse, AnimalRequest } from '../../interfaces/animal';
 import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { AnimalService } from '../../services/animal.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
+import { XlsExporterService } from '../../../../shared/xls-exporter/xls-exporter.service';
 
 @Component({
   selector: 'app-animal-list',
@@ -127,6 +128,23 @@ export class AnimalListComponent {
       },
       error: () => alert('Load error'),
     });
+  }
+
+  exportAsXls() {
+    const date = new Date();
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const time = date.toLocaleTimeString();
+
+    const formattedDate = `${day}_${month}_${year}_${time}`;
+
+    XlsExporterService.exportToXls(
+      `animals_report_${formattedDate}`,
+      this.displayedColumns.filter((h) => !['details', 'actions'].includes(h)),
+      this.animalDataSource.data
+    );
   }
 
   private getAnimalList() {

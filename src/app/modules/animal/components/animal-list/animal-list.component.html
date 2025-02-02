@@ -35,6 +35,19 @@
     </button>
   </mat-card-header>
 
+  @if (animalDataSource.data.length) {
+  <div class="justify-content-start mx-5">
+    <button
+      mat-stroked-button
+      matTooltip="Export as XLS"
+      matTooltipPosition="right"
+      (click)="exportAsXls()"
+    >
+      Export
+    </button>
+  </div>
+  }
+
   <mat-card-content>
     <div class="row mx-3">
       @if (animalDataSource.data.length) {
