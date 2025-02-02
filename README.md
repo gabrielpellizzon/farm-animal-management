@@ -1,6 +1,6 @@
 # Farm Animal Management
 
-\*\*Farm Animal Management is a user-friendly platform designed to streamline the registration of farms and animals, while also offering powerful tools for generating detailed reports. With its intuitive interface, users can easily manage farm data, track animal information, and gain valuable insights through customized reports.
+Farm Animal Management is a user-friendly platform designed to streamline the registration of farms and animals, while also offering powerful tools for generating detailed reports. With its intuitive interface, users can easily manage farm data, track animal information, and gain valuable insights through customized reports.
 
 ---
 
