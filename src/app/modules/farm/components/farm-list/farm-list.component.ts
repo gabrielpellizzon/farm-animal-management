@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dia
 import { FarmRequest, FarmResponse } from '../../interfaces/farm.interface';
 import { FarmService } from '../../services/farm.service';
 import { FarmFormComponent } from '../farm-form/farm-form.component';
+import { FarmAnimalListComponent } from '../farm-animal-list/farm-animal-list.component';
+import { AnimalResponse } from '../../../animal/interfaces/animal';
 
 @Component({
   selector: 'app-farm-list',
@@ -13,7 +15,7 @@ import { FarmFormComponent } from '../farm-form/farm-form.component';
 })
 export class FarmListComponent implements OnInit {
   farmDataSource = new MatTableDataSource<FarmResponse>();
-  displayedColumns = ['name', 'animals', 'actions'];
+  displayedColumns = ['details', 'name', 'animals', 'actions'];
   searchFarmsInput = '';
   filteredFarms: FarmResponse[] = [];
 
@@ -73,7 +75,7 @@ export class FarmListComponent implements OnInit {
   openCreateFarmDialog(farmData?: FarmResponse) {
     const dialogRef = this.dialog.open(FarmFormComponent, {
       width: '70%',
-      maxWidth: '100rem',
+      maxWidth: '100vh',
       disableClose: false,
       data: farmData || {},
     });
@@ -105,13 +107,54 @@ export class FarmListComponent implements OnInit {
     });
   }
 
+  openAnimalList(element: FarmResponse) {
+    this.farmService.getById(element.id).subscribe({
+      next: (farm) => {
+        this.dialog.open(FarmAnimalListComponent, {
+          width: '80%',
+          maxWidth: '100vh',
+          disableClose: false,
+          data: farm || {},
+        });
+      },
+      error: () => alert('Load error'),
+    });
+  }
+
   private getFarmList() {
     this.farmService.getAll().subscribe({
       next: (farmList) => {
-        this.farmDataSource.data = farmList;
+        // const mockedAnimals = this.mockAnimalsForFarms(farmList);
+        this.farmDataSource.data = farmList; //mockedAnimals;
         this.filteredFarms = farmList;
       },
       error: () => alert('Load error'),
     });
   }
+
+  //FUNCTION CREATED TO MOCK ANIMALS (API IS NOT WORKING WELL)
+  // private mockAnimalsForFarms(farms: FarmResponse[]): FarmResponse[] {
+  //   const mockAnimals: AnimalResponse[] = [];
+
+  //   const animalNames = ['Angus', 'Hereford', 'Brahman', 'Nelore'];
+
+  //   farms.forEach((farm) => {
+  //     const numberOfAnimals = Math.floor(Math.random() * 50) + 1;
+  //     const animals: AnimalResponse[] = [];
+
+  //     for (let i = 0; i < numberOfAnimals; i++) {
+  //       animals.push({
+  //         id: mockAnimals.length + 1,
+  //         farmId: farm.id,
+  //         name: animalNames[Math.floor(Math.random() * animalNames.length)],
+  //         tag: `TAG-${farm.id}${i + 1}`,
+  //       });
+  //     }
+
+  //     farm.animals = animals;
+  //     mockAnimals.push(...animals);
+  //   });
+
+  //   return farms;
+  // }
 }

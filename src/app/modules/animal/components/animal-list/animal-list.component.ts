@@ -5,6 +5,7 @@ import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dia
 import { AnimalResponse, AnimalRequest } from '../../interfaces/animal';
 import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { AnimalService } from '../../services/animal.service';
+import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 
 @Component({
   selector: 'app-animal-list',
@@ -13,7 +14,7 @@ import { AnimalService } from '../../services/animal.service';
 })
 export class AnimalListComponent {
   animalDataSource = new MatTableDataSource<AnimalResponse>();
-  displayedColumns = ['name', 'tag', 'farmId', 'actions'];
+  displayedColumns = ['details', 'name', 'tag', 'farmId', 'actions'];
   searchAnimalsInput = '';
   filteredAnimals: AnimalResponse[] = [];
 
@@ -40,7 +41,7 @@ export class AnimalListComponent {
 
   openConfirmationDialog(element: AnimalResponse) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '30%',
+      width: '60%',
       disableClose: false,
       data: { title: element.name },
     });
@@ -80,7 +81,7 @@ export class AnimalListComponent {
   openCreateAnimalDialog(animalData?: AnimalResponse) {
     const dialogRef = this.dialog.open(AnimalFormComponent, {
       width: '70%',
-      maxWidth: '100rem',
+      maxWidth: '100vh',
       disableClose: false,
       data: animalData || {},
     });
@@ -112,6 +113,20 @@ export class AnimalListComponent {
           }
         }
       });
+  }
+
+  openAnimalDetails(element: AnimalResponse) {
+    this.animalService.getById(element.id).subscribe({
+      next: (animal) => {
+        this.dialog.open(AnimalDetailsComponent, {
+          width: '80%',
+          maxWidth: '100vh',
+          disableClose: false,
+          data: animal || {},
+        });
+      },
+      error: () => alert('Load error'),
+    });
   }
 
   private getAnimalList() {

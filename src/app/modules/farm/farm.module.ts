@@ -7,9 +7,10 @@ import { FarmFormComponent } from './components/farm-form/farm-form.component';
 import { FarmViewComponent } from './pages/farm-view/farm-view.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TemplateModule } from '../../template/template.module';
+import { FarmAnimalListComponent } from './components/farm-animal-list/farm-animal-list.component';
 
 @NgModule({
-  declarations: [FarmListComponent, FarmFormComponent, FarmViewComponent],
+  declarations: [FarmListComponent, FarmFormComponent, FarmViewComponent, FarmAnimalListComponent],
   imports: [CommonModule, FarmRoutingModule, SharedModule, TemplateModule],
 })
 export class FarmModule {}

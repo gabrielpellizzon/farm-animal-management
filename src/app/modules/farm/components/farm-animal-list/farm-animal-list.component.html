@@ -1,0 +1,26 @@
+<mat-card class="d-flex flex-column" style="max-height: 600px">
+  <mat-card-header class="d-flex justify-content-between align-items-center">
+    <span class="w-100 text-center fw-bold">{{ data.name }} Animal List</span>
+    <button mat-icon-button (click)="onClose()" class="ms-auto">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="d-flex flex-column align-items-center overflow-auto">
+    @if (data.animals?.length) {
+    <mat-card class="w-75 mb-4" style="background-color: #f5f5f5">
+      <mat-list class="w-100 text-center">
+        @for (animal of data.animals; track $index) {
+        <mat-list-item class="justify-content-center"
+          >{{ animal.name }} - {{ animal.tag }}</mat-list-item
+        >
+        }
+      </mat-list>
+    </mat-card>
+    } @else {
+    <mat-card class="w-100" style="background-color: #f5f5f5">
+      <h5 class="p-4 fw-bold">Empty animal list</h5>
+    </mat-card>
+    }
+  </mat-card-content>
+</mat-card>

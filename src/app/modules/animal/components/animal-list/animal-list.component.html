@@ -39,6 +39,17 @@
     <div class="row mx-3">
       @if (animalDataSource.data.length) {
       <table mat-table [dataSource]="animalDataSource">
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>
+            <strong>Animal details</strong>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openAnimalDetails(element)">
+              <mat-icon>info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>
             <strong>Animal name</strong>
