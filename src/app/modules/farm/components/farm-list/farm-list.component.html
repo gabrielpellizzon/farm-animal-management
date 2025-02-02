@@ -35,6 +35,19 @@
     </button>
   </mat-card-header>
 
+  @if (farmDataSource.data.length) {
+  <div class="justify-content-start mx-5">
+    <button
+      mat-stroked-button
+      matTooltip="Export as PDF"
+      matTooltipPosition="right"
+      (click)="exportFarmsToPDF()"
+    >
+      Export
+    </button>
+  </div>
+  }
+
   <mat-card-content>
     <div class="row mx-3">
       @if (farmDataSource.data.length) {

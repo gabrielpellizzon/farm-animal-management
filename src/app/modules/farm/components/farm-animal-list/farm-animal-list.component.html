@@ -8,12 +8,16 @@
 
   <mat-card-content class="d-flex flex-column align-items-center overflow-auto">
     @if (data.animals?.length) {
-    <mat-card class="w-75 mb-4" style="background-color: #f5f5f5">
-      <mat-list class="w-100 text-center">
+    <mat-card class="w-75 mb-4 p-3" style="background-color: #f5f5f5">
+      <mat-list class="w-100 text-center" dense>
         @for (animal of data.animals; track $index) {
-        <mat-list-item class="justify-content-center"
-          >{{ animal.name }} - {{ animal.tag }}</mat-list-item
-        >
+        <mat-list-item>
+          <mat-icon matListIcon>pets</mat-icon>
+          <div matLine><strong>Name:</strong> {{ animal.name }}</div>
+          <mat-icon matListIcon>label</mat-icon>
+          <div matLine><strong>Tag:</strong> {{ animal.tag }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
         }
       </mat-list>
     </mat-card>
