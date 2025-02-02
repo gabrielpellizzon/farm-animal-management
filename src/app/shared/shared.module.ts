@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
@@ -35,6 +36,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatInputModule,
     MatTooltipModule,
     MatListModule,
+    MatMenuModule,
   ],
   exports: [
     FormsModule,
@@ -51,6 +53,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatInputModule,
     MatTooltipModule,
     MatListModule,
+    MatMenuModule,
   ],
 })
 export class SharedModule {}

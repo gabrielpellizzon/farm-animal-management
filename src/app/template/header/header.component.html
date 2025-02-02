@@ -3,7 +3,15 @@
   style="background-color: #fff; min-height: 63.99px"
 >
   <div class="d-flex align-items-center py-3 w-100">
-    <span class="align-items-start" style="flex-grow: 1">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      matTooltip="Menu"
+      matTooltipPosition="below"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="align-items-start mx-3" style="flex-grow: 1">
       <a href="/">
         <img
           style="padding-bottom: 3px"
@@ -14,3 +22,14 @@
     </span>
   </div>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu" class="mat-menu-panel">
+  <button mat-menu-item (click)="navigateTo('/farm')">
+    <mat-icon>agriculture</mat-icon>
+    <span>Farms</span>
+  </button>
+  <button mat-menu-item (click)="navigateTo('/animal')">
+    <mat-icon>pets</mat-icon>
+    <span>Animals</span>
+  </button>
+</mat-menu>
