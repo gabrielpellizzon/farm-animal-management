@@ -6,7 +6,7 @@ import { AnimalResponse, AnimalRequest } from '../../interfaces/animal';
 import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { AnimalService } from '../../services/animal.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
-import { XlsExporterService } from '../../../../shared/xls-exporter/xls-exporter.service';
+import { CsvExporterService } from '../../../../shared/csv-exporter/csv-exporter.service';
 
 @Component({
   selector: 'app-animal-list',
@@ -130,7 +130,7 @@ export class AnimalListComponent {
     });
   }
 
-  exportAsXls() {
+  exportAsCsv() {
     const date = new Date();
 
     const day = String(date.getDate()).padStart(2, '0');
@@ -140,7 +140,7 @@ export class AnimalListComponent {
 
     const formattedDate = `${day}_${month}_${year}_${time}`;
 
-    XlsExporterService.exportToXls(
+    CsvExporterService.exportToCsv(
       `animals_report_${formattedDate}`,
       this.displayedColumns.filter((h) => !['details', 'actions'].includes(h)),
       this.animalDataSource.data

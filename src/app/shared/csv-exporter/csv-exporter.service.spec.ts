@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { XlsExporterService } from './xls-exporter.service';
+import { CsvExporterService } from './csv-exporter.service';
 
-describe('XlsExporterService', () => {
-  let service: XlsExporterService;
+describe('CsvExporterService', () => {
+  let service: CsvExporterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(XlsExporterService);
+    service = TestBed.inject(CsvExporterService);
   });
 
   it('should be created', () => {

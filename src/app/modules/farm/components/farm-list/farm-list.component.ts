@@ -7,7 +7,10 @@ import { FarmService } from '../../services/farm.service';
 import { FarmFormComponent } from '../farm-form/farm-form.component';
 import { FarmAnimalListComponent } from '../farm-animal-list/farm-animal-list.component';
 import { AnimalResponse } from '../../../animal/interfaces/animal';
-import { XlsExporterService } from '../../../../shared/xls-exporter/xls-exporter.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.vfs;
 
 @Component({
   selector: 'app-farm-list',
@@ -129,7 +132,77 @@ export class FarmListComponent implements OnInit {
     });
   }
 
-  exportAsXls() {
+  exportFarmsToPDF() {
+    if (!this.farmDataSource.data.length) {
+      alert('No farms available to export');
+      return;
+    }
+
+    const content: any[] = [];
+
+    this.farmDataSource.data.forEach((farm, index) => {
+      content.push({ text: farm.name, style: 'title' });
+
+      if (farm.animals && farm.animals.length > 0) {
+        content.push({
+          table: {
+            headerRows: 1,
+            widths: ['auto', '*', '*', 'auto'],
+            body: [
+              [
+                { text: 'ID', style: 'tableHeader' },
+                { text: 'Nome', style: 'tableHeader' },
+                { text: 'Tag', style: 'tableHeader' },
+                { text: 'Number of animals', style: 'tableHeader' },
+              ],
+              ...farm.animals.map((animal) => [
+                animal.id,
+                animal.name,
+                animal.tag,
+                '',
+              ]),
+              [
+                '',
+                '',
+                { text: 'Total number of animals:', style: 'tableFooter' },
+                farm.animals.length,
+              ],
+            ],
+          },
+          layout: 'lightHorizontalLines',
+        });
+      } else {
+        content.push({
+          text: 'No animals registered.',
+          italics: true,
+          margin: [0, 5, 0, 10],
+        });
+      }
+
+      if (index < this.farmDataSource.data.length - 1) {
+        content.push({ text: '', pageBreak: 'after' });
+      }
+    });
+
+    const documentDefinition = {
+      content,
+      styles: {
+        title: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10],
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 12,
+          color: 'white',
+          fillColor: '#4CAF50',
+          alignment: 'center',
+        },
+      },
+    };
+
     const date = new Date();
 
     const day = String(date.getDate()).padStart(2, '0');
@@ -139,11 +212,8 @@ export class FarmListComponent implements OnInit {
 
     const formattedDate = `${day}_${month}_${year}_${time}`;
 
-    XlsExporterService.exportToXls(
-      `farms_report_${formattedDate}`,
-      this.displayedColumns.filter((h) => !['details', 'actions'].includes(h)),
-      this.farmDataSource.data
-    );
+    const pdfDoc = pdfMake.createPdf(documentDefinition as any);
+    pdfDoc.download(`farms_report_${formattedDate}.pdf`);
   }
 
   private getFarmList() {
@@ -172,7 +242,7 @@ export class FarmListComponent implements OnInit {
           id: mockAnimals.length + 1,
           farmId: farm.id,
           name: animalNames[Math.floor(Math.random() * animalNames.length)],
-          tag: `TAG-${farm.id}${i + 1}`,
+          tag: `TAG-${i + 1}`,
         });
       }
 
