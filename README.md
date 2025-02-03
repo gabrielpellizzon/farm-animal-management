@@ -8,8 +8,6 @@ Farm Animal Management is a user-friendly platform designed to streamline the re
 
 - **Frontend**: Angular with Typescript.
 
-## **How to Run the Backend**
-
 ### **1. Prerequisites**
 
 Make sure you have the following tools installed:
