@@ -20,6 +20,12 @@
   padding: 8px;
 }
 
+::ng-deep .mat-menu-panel {
+  top: 70px;
+  background-color: #ffffff !important;
+  border: 1px solid #ccc !important;
+}
+
 @media (max-width: 600px) {
   .fab-button {
     display: none;

@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationDialogComponent } from '../../../../shared/confirmation-dialog/confirmation-dialog.component';
-import { AnimalResponse, AnimalRequest } from '../../interfaces/animal';
+import {
+  AnimalResponse,
+  AnimalRequest,
+  MultipleAnimalRequest,
+} from '../../interfaces/animal';
 import { AnimalFormComponent } from '../animal-form/animal-form.component';
 import { AnimalService } from '../../services/animal.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { CsvExporterService } from '../../../../shared/csv-exporter/csv-exporter.service';
+import { MultipleAnimalFormComponent } from '../multiple-animal-form/multiple-animal-form.component';
 
 @Component({
   selector: 'app-animal-list',
@@ -102,18 +107,42 @@ export class AnimalListComponent {
               },
             });
           } else {
-            const farmToUpdate: AnimalResponse = data as AnimalResponse;
+            const animalToUpdate: AnimalResponse = data as AnimalResponse;
 
-            this.animalService.update(animalData.id, farmToUpdate).subscribe({
+            this.animalService.update(animalData.id, animalToUpdate).subscribe({
               error: () => alert('Update error'),
               complete: () => {
                 this.getAnimalList();
-                alert('Update success');
               },
             });
           }
         }
       });
+  }
+
+  openCreateMultipleAnimalsDialog() {
+    const dialogRef = this.dialog.open(MultipleAnimalFormComponent, {
+      width: '70%',
+      maxWidth: '100vh',
+      disableClose: false,
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        const animalsToCreate: MultipleAnimalRequest[] =
+          this.convertToMultipleAnimalRequest(data);
+
+        animalsToCreate.forEach((animalList: MultipleAnimalRequest) =>
+          this.animalService.createAnimals(animalList).subscribe({
+            error: () => alert('Create list error'),
+            complete: () => {
+              this.getAnimalList();
+              alert('Create list success');
+            },
+          })
+        );
+      }
+    });
   }
 
   openAnimalDetails(element: AnimalResponse) {
@@ -145,6 +174,25 @@ export class AnimalListComponent {
       this.displayedColumns.filter((h) => !['details', 'actions'].includes(h)),
       this.animalDataSource.data
     );
+  }
+
+  private convertToMultipleAnimalRequest(
+    data: { farmId: number; name: string; tag: string }[]
+  ): MultipleAnimalRequest[] {
+    const result: MultipleAnimalRequest[] = [];
+
+    data.forEach(({ farmId, name, tag }) => {
+      let farmGroup = result.find((group) => group.farmId === farmId);
+
+      if (!farmGroup) {
+        farmGroup = { farmId, animals: [] };
+        result.push(farmGroup);
+      }
+
+      farmGroup.animals.push({ name, tag });
+    });
+
+    return result;
   }
 
   private getAnimalList() {

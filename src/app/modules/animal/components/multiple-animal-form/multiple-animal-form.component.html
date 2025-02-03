@@ -1,0 +1,79 @@
+<mat-card class="p-4" style="max-height: 600px">
+  <mat-card-content>
+    <div class="row col-sm-12 mb-3">
+      <h2>Manage Animals</h2>
+    </div>
+
+    <form [formGroup]="animalForm">
+      <div formArrayName="animals">
+        <div
+          class="row align-items-center g-2"
+          style="align-items: center !important"
+          *ngFor="let animal of animals.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="col-md-3 d-flex">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Farm ID</mat-label>
+              <input matInput formControlName="farmId" type="number" />
+              <mat-error *ngIf="animal.get('farmId')?.invalid">
+                Farm ID is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4 d-flex">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" />
+              <mat-error *ngIf="animal.get('name')?.invalid">
+                Name must be at least 5 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 d-flex">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Tag</mat-label>
+              <input matInput formControlName="tag" />
+              <mat-error *ngIf="animal.get('tag')?.invalid">
+                Tag must be at least 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 d-flex pb-4 justify-content-center">
+            <button
+              mat-icon-button
+              style="color: var(--danger)"
+              (click)="removeAnimal(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+        mat-flat-button
+        (click)="addAnimal()"
+        class="mr-2"
+        style="background-color: var(--success); color: #fff"
+      >
+        Add Animal
+      </button>
+      <button
+        mat-flat-button
+        (click)="onAdd()"
+        class="ml-2"
+        style="background-color: var(--primary); color: #fff"
+      >
+        Save Animals
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>
