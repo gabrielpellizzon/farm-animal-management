@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AnimalResponse, AnimalRequest } from '../interfaces/animal';
+import {
+  AnimalResponse,
+  AnimalRequest,
+  MultipleAnimalRequest,
+} from '../interfaces/animal';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +22,19 @@ export class AnimalService {
     return this.http.get<AnimalResponse>(`${this.apiUrl}/${id}`);
   }
 
-  create(farm: AnimalRequest) {
-    return this.http.post<AnimalRequest>(this.apiUrl, farm);
+  create(animal: AnimalRequest) {
+    return this.http.post<AnimalRequest>(this.apiUrl, animal);
   }
 
-  update(id: number, farm: AnimalRequest) {
-    return this.http.put<AnimalRequest>(`${this.apiUrl}/${id}`, farm);
+  createAnimals(animalList: MultipleAnimalRequest) {
+    return this.http.post<MultipleAnimalRequest>(
+      `${this.apiUrl}/add-list`,
+      animalList
+    );
+  }
+
+  update(id: number, animal: AnimalRequest) {
+    return this.http.put<AnimalRequest>(`${this.apiUrl}/${id}`, animal);
   }
 
   delete(id: number) {

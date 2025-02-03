@@ -143,6 +143,10 @@ input::-webkit-inner-spin-button {
   }
 }
 
+mat-error {
+  color: var(--danger);
+}
+
 .snackbar {
   border-radius: $border-radius;
   padding: $padding-medium;

@@ -21,9 +21,7 @@
         />
 
         @if (animalFormGroup.controls.farmId.invalid) {
-        <mat-error style="color: var(--danger)">{{
-          farmIdErrorMessage()
-        }}</mat-error>
+        <mat-error>{{ farmIdErrorMessage() }}</mat-error>
         }
       </mat-form-field>
 
@@ -36,9 +34,7 @@
         />
 
         @if (animalFormGroup.controls.name.invalid) {
-        <mat-error style="color: var(--danger)">{{
-          nameErrorMessage()
-        }}</mat-error>
+        <mat-error>{{ nameErrorMessage() }}</mat-error>
         }
       </mat-form-field>
 
@@ -51,9 +47,7 @@
         />
 
         @if (animalFormGroup.controls.tag.invalid) {
-        <mat-error style="color: var(--danger)">{{
-          tagErrorMessage()
-        }}</mat-error>
+        <mat-error>{{ tagErrorMessage() }}</mat-error>
         }
       </mat-form-field>
     </form>

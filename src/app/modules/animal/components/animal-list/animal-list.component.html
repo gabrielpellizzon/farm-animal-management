@@ -18,7 +18,7 @@
       class="fab-button"
       matTooltip="Add Animal"
       matTooltipPosition="below"
-      (click)="openCreateAnimalDialog()"
+      [matMenuTriggerFor]="addAnimalOption"
     >
       <mat-icon>add</mat-icon>
       Add Animal
@@ -29,7 +29,7 @@
       class="icon-button"
       matTooltip="Add Animal"
       matTooltipPosition="below"
-      (click)="openCreateAnimalDialog()"
+      [matMenuTriggerFor]="addAnimalOption"
     >
       <mat-icon>add</mat-icon>
     </button>
@@ -131,7 +131,7 @@
       >
         <mat-card-content class="my-3">
           <h5>
-            <strong>Empty farm list</strong>
+            <strong>Empty animal list</strong>
           </h5>
         </mat-card-content>
       </mat-card>
@@ -139,3 +139,12 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<mat-menu #addAnimalOption="matMenu" class="mat-menu-panel">
+  <button mat-menu-item (click)="openCreateAnimalDialog()">
+    <span>Add animal</span>
+  </button>
+  <button mat-menu-item (click)="openCreateMultipleAnimalsDialog()">
+    <span>Add multiple animals</span>
+  </button>
+</mat-menu>

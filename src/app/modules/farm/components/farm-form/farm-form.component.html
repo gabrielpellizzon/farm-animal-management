@@ -21,7 +21,7 @@
         <input matInput formControlName="name" (input)="updateErrorMessage()" />
 
         @if (farmFormGroup.controls.name.invalid) {
-        <mat-error style="color: var(--danger)">{{ errorMessage() }}</mat-error>
+        <mat-error>{{ errorMessage() }}</mat-error>
         }
       </mat-form-field>
     </form>

@@ -7,3 +7,11 @@ export interface AnimalRequest {
 export interface AnimalResponse extends AnimalRequest {
   id: number;
 }
+
+export interface MultipleAnimalRequest {
+  animals: {
+    name: string;
+    tag: string;
+  }[];
+  farmId: number;
+}
