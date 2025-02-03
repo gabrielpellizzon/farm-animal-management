@@ -37,6 +37,10 @@ Make sure you have the following tools installed:
 
 ## **Running the Frontend**
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+
+To run the project, execute de command:
+
 ```bash
    ng serve
 ```
