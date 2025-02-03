@@ -16,6 +16,7 @@ Make sure you have the following tools installed:
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Angular CLI](https://github.com/angular/angular-cli#installation)
 
 ### **2. Environment Configuration**
 
