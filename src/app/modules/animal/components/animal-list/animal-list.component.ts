@@ -113,6 +113,7 @@ export class AnimalListComponent {
               error: () => alert('Update error'),
               complete: () => {
                 this.getAnimalList();
+                alert('Create success');
               },
             });
           }
@@ -137,7 +138,6 @@ export class AnimalListComponent {
             error: () => alert('Create list error'),
             complete: () => {
               this.getAnimalList();
-              alert('Create list success');
             },
           })
         );
